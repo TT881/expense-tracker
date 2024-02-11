@@ -1,0 +1,53 @@
+<div fxLayout="row" class="main-container">
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="side" opened="true" class="sidenav">
+            <mat-list-item>
+                <div class="Profile" [fxLayout]="this.isSmallScreen ? ' column' : 'row' " fxLayoutAlign="start center"
+                    fxLayoutGap="8px">
+                    <mat-icon class="icon-display large-icon">account_circle</mat-icon>
+                    <span class="Title">{{this.Name}}</span>
+                </div>
+                <div fxFlex="10"></div>
+            </mat-list-item>
+            <mat-list-item>
+                <div class="Menu" [fxLayout]="this.isSmallScreen ? ' column' : 'row' " fxLayoutAlign="start center">
+                    <div class="MenuBox"> <span style="color: white; ">Menu</span>
+                    </div>
+                </div>
+            </mat-list-item>
+
+            <div class="my-custom-list-item">
+                <mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="onItemClick('My DashBoard')">
+                    <div class="Listitems" [fxLayout]="'row'" fxLayoutAlign="start center"
+                        [ngClass]="{'active': activeLink === 'DashBoard'}">
+                        <mat-icon>home</mat-icon>
+                        <span class="itemTitle">Dashboard</span>
+                    </div>
+                </mat-list-item>
+            </div>
+            <mat-list-item routerLink="/expenses/submit-expense" routerLinkActive="active"
+                [ngClass]="{'active': activeLink == 'Expense Management'}" (click)="onItemClick('Expense Management')">
+                <div class="Listitems" [fxLayout]="'row'" fxLayoutAlign="start center">
+                    <mat-icon> money</mat-icon>
+                    <span class="itemTitle">Submit Expense</span>
+                </div>
+            </mat-list-item>
+            <mat-list-item class="my-custom-list-item" routerLink="/expenses/expense-history" routerLinkActive="active"
+                [ngClass]="{'active': activeLink == 'Expense History'}" (click)="onItemClick('Expense History')">
+                <div class="Listitems" [fxLayout]="'row'" fxLayoutAlign="start center">
+                    <mat-icon>list</mat-icon>
+                    <span class="itemTitle">Expense History</span>
+                </div>
+            </mat-list-item>
+
+            <mat-list-item routerLink="/sign-out" routerLinkActive="active" (click)="onItemClick('signOut')"
+                [ngClass]="{'active': activeLink === 'signOut'}">
+                <div class="Listitems" [fxLayout]="'row'" fxLayoutAlign="start center">
+                    <mat-icon>power_settings_new</mat-icon>
+                    <span class="itemTitle">Sign Out</span>
+                </div>
+            </mat-list-item>
+        </mat-sidenav>
+    </mat-sidenav-container>
+
+</div>

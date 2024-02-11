@@ -1,10 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Observable, map } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import {
+  NavigationEnd,
+  NavigationError,
+  Router,
+  RouterEvent,
+} from '@angular/router';
+import { GlobalTitleService } from '../../globalTitle.service';
 
 @Component({
   selector: 'app-side-nav',
-  //standalone: true,
-  //imports: [],
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.scss',
 })
-export class SideNavComponent {}
+export class SideNavComponent {
+  isSmallScreen: Observable<boolean> | undefined;
+  activeLink: string | undefined = 'My DashBoard';
+
+  constructor(
+    private breakpointob: BreakpointObserver,
+    private router: Router,
+    private _titleService: GlobalTitleService
+  ) {
+    this.isSmallScreen = this.breakpointob
+      .observe(Breakpoints.XSmall)
+      .pipe(map((result) => result.matches));
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.activeLink = event.urlAfterRedirects;
+      }
+      if (event instanceof NavigationError) {
+        console.log('Navigation Error:', event.error);
+      }
+    });
+  }
+  Name: string = 'Ting Ting';
+
+  onItemClick(item: string) {
+    this.activeLink = item;
+    this._titleService.setName(item);
+  }
+
+  ngOnInit(): void {
+    //this._titleService.setName('My DashBoard');
+  }
+}

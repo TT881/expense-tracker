@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { ExpenseListsComponent } from './ExpenseLists/ExpenseLists.component';
 import { DashboardComponent } from './Dashboard/Dashboard.component';
+import { ExpenseHistoryComponent } from './ExpenseHistory/ExpenseHistory.component';
 
 export const EXPENSE_ROUTES: Route[] = [
   {
@@ -8,6 +9,6 @@ export const EXPENSE_ROUTES: Route[] = [
     pathMatch: 'full',
     redirectTo: 'expenses', //default
   },
-  { path: 'expenses', component: ExpenseListsComponent },
-  { path: 'tingting', component: DashboardComponent },
+  { path: 'submit-expense', component: ExpenseListsComponent },
+  { path: 'expense-history', component: ExpenseHistoryComponent },
 ];

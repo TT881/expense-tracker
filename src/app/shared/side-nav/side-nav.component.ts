@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {
@@ -7,7 +7,6 @@ import {
   Router,
   RouterEvent,
 } from '@angular/router';
-import { GlobalTitleService } from '../../globalTitle.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -17,11 +16,11 @@ import { GlobalTitleService } from '../../globalTitle.service';
 export class SideNavComponent {
   isSmallScreen: Observable<boolean> | undefined;
   activeLink: string | undefined = 'My DashBoard';
+  @Input() tileName: string | undefined;
 
   constructor(
     private breakpointob: BreakpointObserver,
-    private router: Router,
-    private _titleService: GlobalTitleService
+    private router: Router
   ) {
     this.isSmallScreen = this.breakpointob
       .observe(Breakpoints.XSmall)
@@ -37,12 +36,5 @@ export class SideNavComponent {
   }
   Name: string = 'Ting Ting';
 
-  onItemClick(item: string) {
-    this.activeLink = item;
-    this._titleService.setName(item);
-  }
-
-  ngOnInit(): void {
-    //this._titleService.setName('My DashBoard');
-  }
+  ngOnInit(): void {}
 }

@@ -17,7 +17,7 @@
             </mat-list-item>
 
             <div class="my-custom-list-item">
-                <mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="onItemClick('My DashBoard')">
+                <mat-list-item routerLink="/dashboard" routerLinkActive="active">
                     <div class="Listitems" [fxLayout]="'row'" fxLayoutAlign="start center"
                         [ngClass]="{'active': activeLink === 'DashBoard'}">
                         <mat-icon>home</mat-icon>
@@ -26,21 +26,21 @@
                 </mat-list-item>
             </div>
             <mat-list-item routerLink="/expenses/submit-expense" routerLinkActive="active"
-                [ngClass]="{'active': activeLink == 'Expense Management'}" (click)="onItemClick('Expense Management')">
+                [ngClass]="{'active': activeLink == 'Expense Management'}">
                 <div class="Listitems" [fxLayout]="'row'" fxLayoutAlign="start center">
                     <mat-icon> money</mat-icon>
                     <span class="itemTitle">Submit Expense</span>
                 </div>
             </mat-list-item>
             <mat-list-item class="my-custom-list-item" routerLink="/expenses/expense-history" routerLinkActive="active"
-                [ngClass]="{'active': activeLink == 'Expense History'}" (click)="onItemClick('Expense History')">
+                [ngClass]="{'active': activeLink == 'Expense History'}">
                 <div class="Listitems" [fxLayout]="'row'" fxLayoutAlign="start center">
                     <mat-icon>list</mat-icon>
                     <span class="itemTitle">Expense History</span>
                 </div>
             </mat-list-item>
 
-            <mat-list-item routerLink="/sign-out" routerLinkActive="active" (click)="onItemClick('signOut')"
+            <mat-list-item routerLink="/sign-out" routerLinkActive="active"
                 [ngClass]="{'active': activeLink === 'signOut'}">
                 <div class="Listitems" [fxLayout]="'row'" fxLayoutAlign="start center">
                     <mat-icon>power_settings_new</mat-icon>

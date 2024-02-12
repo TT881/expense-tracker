@@ -12,6 +12,7 @@ import { DashboardComponent } from '../Dashboard/Dashboard.component';
 })
 export class ExpenseHistoryComponent implements OnInit {
   constructor() {}
+  expensehistoryName = 'Expense History';
 
   ngOnInit() {}
 }

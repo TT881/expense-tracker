@@ -1,8 +1,8 @@
-import { GlobalTitleService } from './../globalTitle.service';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { MatTabsModule } from '@angular/material/tabs';
+import { SideNavComponent } from '../shared/side-nav/side-nav.component';
 
 @Component({
   standalone: true,
@@ -13,19 +13,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 })
 export class DashboardComponent implements OnInit {
   TitleName: string | undefined;
+  @Input() Name: string | undefined = 'My Dashboard';
 
-  constructor(
-    private _titleService: GlobalTitleService,
-    private cdr: ChangeDetectorRef
-  ) {
-    this._titleService.$titleName.subscribe((name) => {
-      this.TitleName = name;
-      this.cdr.markForCheck();
-    });
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
-    this._titleService.$titleName.subscribe((name) => {
-      this.TitleName = name;
-    });
+    this.TitleName = this.Name;
   }
 }

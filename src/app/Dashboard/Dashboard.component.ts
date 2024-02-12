@@ -14,7 +14,7 @@ import { SideNavComponent } from '../shared/side-nav/side-nav.component';
 export class DashboardComponent implements OnInit {
   TitleName: string | undefined;
   Name: string | undefined = 'My Dashboard';
-
+  totalExpenseIcon: string = 'assets/Icon/expense.png';
   constructor(private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {}
 }

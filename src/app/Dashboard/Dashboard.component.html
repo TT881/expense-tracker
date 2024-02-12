@@ -1,2 +1,40 @@
-<app-side-nav [titleName]="this.Name">
-</app-side-nav>
+<div class="dashboard-container" fxLayout="row">
+    <app-side-nav fxFlex="20%">
+    </app-side-nav>
+    <!--Title-->
+    <div fxLayout="row" class="sideContext" style="width: 100%;">
+        <div fxFlex class="content-area">
+            <div class="TitleName">{{this.Name}}</div>
+        </div>
+        <!--Context-->
+        <div class="div1" fxLayout="row" fxLayout.xs="column">
+            <div class="TotalExpense" fxLayout="row" fxFlex="33.3%" fxFlex.xs="100%">
+                <div fxLayout="row" fxLayoutAlign="space-between" fxFlexFill>
+                    <div style="display: flex; align-items: center; justify-content: start;">
+                        <span fxFlex="50" style="font-size: large;">{{"22"}}</span>
+                        <label style="padding:4px; font-size: large;">Total Expense</label>
+                        <img fxFlex="50" class="Image" [src]="totalExpenseIcon" alt="Total Expense">
+                    </div>
+                </div>
+            </div>
+            <div class="TotalExpense" fxLayout="row" fxFlex="33.3%" fxFlex.xs="100%">
+                <div fxLayout="row" fxLayoutAlign="space-between" fxFlexFill>
+                    <div style="display: flex; align-items: center; justify-content: start;">
+                        <span fxFlex="50" style="font-size: large;">{{"22"}}</span>
+                        <label style="padding:4px; font-size: large;">Total Expense</label>
+                        <img fxFlex="50" class="Image" [src]="totalExpenseIcon" alt="Total Expense">
+                    </div>
+                </div>
+            </div>
+            <div class="TotalExpense" fxLayout="row" fxFlex="33.3%" fxFlex.xs="100%">
+                <div fxLayout="row" fxLayoutAlign="space-between" fxFlexFill>
+                    <div style="display: flex; align-items: center; justify-content: start;">
+                        <span fxFlex="50" style="font-size: large;">{{"22"}}</span>
+                        <label style="padding:4px; font-size: large;">Total Expense</label>
+                        <img fxFlex="50" class="Image" [src]="totalExpenseIcon" alt="Total Expense">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

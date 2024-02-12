@@ -1,1 +1,9 @@
-<app-side-nav [titleName]="this.expensehistoryName"></app-side-nav>
+<div class="dashboard-container" fxLayout="row">
+    <app-side-nav fxFlex="20%">
+    </app-side-nav>
+    <div fxLayout="row" class="sideContext" style="width: 100%;">
+        <div fxFlex class="content-area">
+            <div class="TitleName">{{this.expensehistoryName}}</div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,9 @@
-<app-side-nav [titleName]="'Expense Management'"></app-side-nav>
+<div class="dashboard-container" fxLayout="row">
+    <app-side-nav fxFlex="20%">
+    </app-side-nav>
+    <div fxLayout="row" class="sideContext" style="width: 100%;">
+        <div fxFlex class="content-area">
+            <div class="TitleName">{{this.titleName}}</div>
+        </div>
+    </div>
+</div>

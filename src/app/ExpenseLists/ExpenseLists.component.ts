@@ -13,6 +13,6 @@ import { SharedModule } from '../shared/shared.module';
 })
 export class ExpenseListsComponent implements OnInit {
   constructor() {}
-
+  titleName: string | undefined = 'Expense Management';
   ngOnInit() {}
 }

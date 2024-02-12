@@ -1,0 +1,23 @@
+.dashboard-container {
+  display: flex;
+  max-width: 100%;
+}
+.sideContext {
+  display: flex;
+  flex-direction: column;
+}
+.content-area {
+  padding: 5px;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 30px;
+}
+.TitleName {
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
+  margin: 3px;
+}

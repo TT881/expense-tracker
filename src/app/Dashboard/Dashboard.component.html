@@ -1,7 +1,2 @@
-<div fxLayout="row" class="main-container">
-    <app-side-nav>
-    </app-side-nav>
-    <div fxFlex class="content-area">
-        <div class="TitleName">{{this.Name}}</div>
-    </div>
-</div>
+<app-side-nav [titleName]="this.Name">
+</app-side-nav>

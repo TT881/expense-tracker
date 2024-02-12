@@ -12,7 +12,7 @@
       width: 100px;
     }
     .Profile {
-      flex-direction: column; /* Stack icon and title vertically */
+      flex-direction: column;
     }
     .Title {
       text-align: center;
@@ -62,11 +62,26 @@ mat-list-item.active {
     background-color: #e4d6d6 !important;
   }
 }
-//Title Tab
+
 .main-container {
-  height: 100vh;
   display: flex;
-  background-color: white;
-  max-height: 100%;
-  overflow-y: auto;
+  width: 100%;
+}
+
+.content-area {
+  padding: 5px;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  max-height: 30px;
+}
+
+.TitleName {
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
+  margin: 3px;
 }

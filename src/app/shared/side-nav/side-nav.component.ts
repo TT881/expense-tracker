@@ -16,7 +16,7 @@ import {
 export class SideNavComponent {
   isSmallScreen: Observable<boolean> | undefined;
   activeLink: string | undefined = 'My DashBoard';
-  @Input() tileName: string | undefined;
+  @Input() titleName: string | undefined;
 
   constructor(
     private breakpointob: BreakpointObserver,

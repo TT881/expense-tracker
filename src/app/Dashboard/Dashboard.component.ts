@@ -13,10 +13,8 @@ import { SideNavComponent } from '../shared/side-nav/side-nav.component';
 })
 export class DashboardComponent implements OnInit {
   TitleName: string | undefined;
-  @Input() Name: string | undefined = 'My Dashboard';
+  Name: string | undefined = 'My Dashboard';
 
   constructor(private cdr: ChangeDetectorRef) {}
-  ngOnInit(): void {
-    this.TitleName = this.Name;
-  }
+  ngOnInit(): void {}
 }

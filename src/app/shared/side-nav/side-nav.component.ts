@@ -7,6 +7,7 @@ import {
   Router,
   RouterEvent,
 } from '@angular/router';
+import { AuthenticationService } from '../services/Authentication.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -20,7 +21,8 @@ export class SideNavComponent {
 
   constructor(
     private breakpointob: BreakpointObserver,
-    private router: Router
+    private router: Router,
+    private _authService: AuthenticationService
   ) {
     this.isSmallScreen = this.breakpointob
       .observe(Breakpoints.XSmall)
@@ -35,6 +37,10 @@ export class SideNavComponent {
     });
   }
   Name: string = 'Ting Ting';
+
+  Signout() {
+    this._authService.logout();
+  }
 
   ngOnInit(): void {}
 }

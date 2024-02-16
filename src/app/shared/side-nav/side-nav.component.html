@@ -39,8 +39,8 @@
             </div>
         </mat-list-item>
 
-        <mat-list-item routerLink="/sign-out" routerLinkActive="active"
-            [ngClass]="{'active': activeLink === 'signOut'}">
+        <mat-list-item routerLink="/login" routerLinkActive="active" [ngClass]="{'active': activeLink === 'login'}"
+            (click)="Signout()">
             <div class="Listitems" [fxLayout]="'row'" fxLayoutAlign="start center">
                 <mat-icon>power_settings_new</mat-icon>
                 <span class="itemTitle">Sign Out</span>

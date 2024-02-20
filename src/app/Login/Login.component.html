@@ -1,3 +1,23 @@
-<p>
-  Login works!
-</p>
+<!-- login.component.html -->
+<div class="login-container">
+  <div class="login-form">
+    <h1>Login</h1>
+    <form name="loginForm" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <div class="input-group">
+        <input type="text" name="username" ngModel required #username="ngModel" placeholder="Username"
+          [(ngModel)]="loginModel.username">
+        <div *ngIf="username.invalid && username.touched" class="alert">
+          Username is required
+        </div>
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" ngModel required #password="ngModel" placeholder="Password"
+          [(ngModel)]="loginModel.password">
+        <div *ngIf="password.invalid && password.touched" class="alert">
+          Password is required
+        </div>
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  </div>
+</div>

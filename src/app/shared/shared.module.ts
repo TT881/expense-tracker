@@ -6,6 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [SideNavComponent],
@@ -17,6 +18,11 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     FlexLayoutModule,
     RouterModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
 })
 export class SharedModule {}

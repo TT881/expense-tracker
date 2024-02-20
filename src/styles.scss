@@ -1,4 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Custom toast position */
+.custom-toast-position {
+  top: 50% !important;
+  right: 50% !important;
+  transform: translateX(50%) translateY(-50%);
+}
+
+/* Targeting by ID */
+#toast-container.toast-top-center {
+  /* Example custom style */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Alternatively, targeting by class only */
+.toast-container.toast-top-center {
+  /* Example custom style */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}

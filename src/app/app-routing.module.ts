@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './Dashboard/Dashboard.component';
 import { LoginComponent } from './Login/Login.component';
+import { SignUpComponent } from './SignUp/SignUp.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -12,6 +13,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./expenses-route').then((m) => m.EXPENSE_ROUTES),
   },
+  { path: 'signup', component: SignUpComponent },
 ];
 
 @NgModule({

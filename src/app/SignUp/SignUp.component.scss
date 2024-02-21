@@ -1,14 +1,15 @@
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.Signup-container {
+  width: 100%;
   min-height: 100vh;
   background: #0093e9; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #80d0c7, #0093e9);
   background: linear-gradient(to right, #80d0c7, #0093e9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.login-form {
+.signup-form {
   background: white;
   padding: 20px;
   border-radius: 8px;
@@ -18,7 +19,7 @@
   box-sizing: border-box;
 }
 
-.login-form h1 {
+.signup-form h1 {
   text-align: center;
   color: #333;
   margin-bottom: 24px;
@@ -37,53 +38,47 @@
   width: 100%;
 }
 
-.input-group .alert {
+.alert {
   color: #d9534f;
   font-size: 12px;
-  padding-top: 5px;
+  padding-top: 3px;
 }
 
-.remember-me {
-  margin-bottom: 16px;
+.BtnSection {
   display: flex;
-  font-size: 14px;
-  color: #333;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.remember-me input {
-  margin-right: 10px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
+.SubmitBtn,
+.BackBtn {
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
-  background-color: #0056b3;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 5px;
 }
 
-button:hover {
-  background-color: #003d82;
+.SubmitBtn {
+  background-color: #4caf50;
+  color: white;
 }
 
-button:disabled {
+.BackBtn {
+  background-color: #f44336;
+  color: white;
+}
+
+.SubmitBtn:hover {
+  background-color: rgb(29, 227, 118);
+}
+
+.SubmitBtn:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }
 
-.signup {
-  margin-top: 10px;
-  text-align: center;
-}
-
 @media (max-width: 768px) {
-  .login-form {
+  .signup-form {
     width: 90%;
     margin: 10px;
   }

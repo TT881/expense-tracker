@@ -6,7 +6,7 @@ export const EXPENSE_ROUTES: Route[] = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'expenses', //default
+    redirectTo: 'expenses', //default  view when accessing /expenses
   },
   { path: 'submit-expense', component: ExpenseListsComponent },
   { path: 'expense-history', component: ExpenseHistoryComponent },

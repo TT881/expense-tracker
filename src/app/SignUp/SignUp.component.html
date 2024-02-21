@@ -1,0 +1,36 @@
+<div class="Signup-container">
+  <div class="signup-form">
+    <h1>Sign Up</h1>
+    <form name="SignUpForm" #SignUpForm="ngForm" (ngSubmit)="OnSignUp(SignUpForm)">
+      <div class="input-group">
+        <input type="text" name="username" ngModel required #username="ngModel" placeholder="Username" minlength="5"
+          [(ngModel)]="SignUpModel.username">
+        <div *ngIf="username.invalid && username.touched" class="alert">Username is required
+        </div>
+        <div *ngIf="username.errors?.['minlength'] && username.touched">Username must be at least 5 characters long.
+        </div>
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" ngModel required #password="ngModel" placeholder="Password" minlength="5"
+          [(ngModel)]="SignUpModel.password">
+        <div *ngIf="password.invalid && password.touched" class="alert">Password is required</div>
+        <div *ngIf="password.errors?.['minlength'] && password.touched" class="alert">
+          Password must be at least 5 characters long.
+        </div>
+      </div>
+
+      <div class="input-group">
+        <input type="password" name="retypepw" ngModel required #retypepw="ngModel" placeholder="Retype Password"
+          minlength="5" [(ngModel)]="SignUpModel.retypepw">
+        <div *ngIf="!passwordsMatch && retypepw.touched" class="alert">Passwords do not match with the above.</div>
+        <div *ngIf="retypepw.errors?.['minlength'] && password.touched" class="alert">
+          Password must be at least 5 characters long.
+        </div>
+      </div>
+      <div class="BtnSection">
+        <button class="SubmitBtn" [disabled]="SignUpForm.invalid || !passwordsMatch">Submit</button>
+        <button class="BackBtn" [routerLink]="['/login']" routerLinkActive="router-link-active">Back</button>
+      </div>
+    </form>
+  </div>
+</div>

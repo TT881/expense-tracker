@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { CanActivateFn, NavigationEnd, Router } from '@angular/router';
 import { APIService } from './API.service';
 import { JsonPipe } from '@angular/common';
 import { TostrInterface } from '../Models/TostrInterface';
@@ -20,10 +20,8 @@ export class AuthenticationService {
     this.apiservice.validateUser(username, password).subscribe({
       next: (data) => {
         if (data != null) {
-          console.log(JSON.stringify(data));
-          console.log(data[0]['Name']);
-          console.log(data[0]['UserId']);
-          localStorage.setItem('ExpenseuserData', JSON.stringify(data));
+          localStorage.setItem('ExpenseUserName', data[0]['Name']);
+          localStorage.setItem('ExpenseUserID', data[0]['UserId']);
           localStorage.setItem('isExpenseuserLoggedIn', 'true');
           this.router.navigate(['/dashboard']);
           this.tostrservice.success(
@@ -44,8 +42,9 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.removeItem('ExpenseuserData');
     localStorage.removeItem('isExpenseuserLoggedIn');
+    localStorage.removeItem('ExpenseUserName');
+    localStorage.removeItem('ExpenseUserID');
     this.router.navigate(['/login'], { replaceUrl: true });
   }
 

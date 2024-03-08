@@ -1,1 +1,88 @@
 @import "../styles/globalstyle.scss";
+
+.OutsideContainer {
+  margin-top: 2px;
+}
+.Expense-container {
+  margin: auto;
+  max-width: 700px;
+  overflow: auto;
+  padding: 20px;
+  // border: 1px solid gray;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  .Expense-container {
+    padding: 10px; /* Less padding on smaller screens */
+    height: 80vh;
+  }
+  .OutsideContainer {
+    margin: 5px;
+  }
+}
+
+.ExpenseList-Content {
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.Title {
+  text-align: center;
+  margin: 2px;
+}
+
+.expenseForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-group label {
+  flex-basis: 30%; /* Adjust the width of the label */
+  text-align: right;
+  margin-right: 10px;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+  flex-grow: 1; /* Allows the input to grow and fill the space */
+  min-height: 25px;
+}
+
+.form-group textarea {
+  height: 80px;
+}
+
+.SubmitBtn {
+  background-color: #70c3ce;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-left: 220px;
+}
+
+.SubmitBtn:hover {
+  background-color: #3b7587;
+}
+
+hr.solid {
+  margin: 1px;
+  border-top: 1px solid #bbb;
+  color: red;
+}
+
+h2 {
+  text-align: center;
+}

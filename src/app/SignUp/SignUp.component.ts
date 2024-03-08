@@ -49,5 +49,9 @@ export class SignUpComponent implements OnInit {
       });
     }
   }
-  ngOnInit() {}
+
+  ngOnInit() {
+    this.SignUpModel.retypepw = '';
+    this.SignUpModel.username = '';
+  }
 }

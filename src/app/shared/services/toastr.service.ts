@@ -1,6 +1,5 @@
 import { TostrInterface } from './../Models/TostrInterface';
 import { Injectable } from '@angular/core';
-import { equal } from 'assert';
 import { ToastrService as NgxToastrService } from 'ngx-toastr';
 
 @Injectable({

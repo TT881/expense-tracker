@@ -18,6 +18,7 @@ export class SideNavComponent {
   isSmallScreen: Observable<boolean> | undefined;
   activeLink: string | undefined = 'My DashBoard';
   @Input() titleName: string | undefined;
+  Name: any;
 
   constructor(
     private breakpointob: BreakpointObserver,
@@ -35,12 +36,14 @@ export class SideNavComponent {
         console.log('Navigation Error:', event.error);
       }
     });
+    this.Name = localStorage.getItem('ExpenseUserName');
   }
-  Name: string = 'Ting Ting';
 
   Signout() {
     this._authService.logout();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.Name = localStorage.getItem('ExpenseUserName');
+  }
 }

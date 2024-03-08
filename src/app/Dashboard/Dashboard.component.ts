@@ -16,5 +16,6 @@ export class DashboardComponent implements OnInit {
   Name: string | undefined = 'My Dashboard';
   totalExpenseIcon: string = 'assets/Icon/expense.png';
   constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit(): void {}
 }

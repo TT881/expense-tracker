@@ -10,13 +10,15 @@
             <div class="Expense-container" fxLayout="row">
                 <h1 class="Title">Expense Report Form</h1>
                 <div class="ExpenseList-Content">
-                    <form class="expenseForm" [formGroup]="this.ExpenseListForm">
+                    <form class="expenseForm" [formGroup]="this.ExpenseListForm"
+                        (submit)="onSubmit(this.ExpenseListForm.value)">
                         <div class="form-group">
                             <label for="category">Expense Category:</label>
-                            <select id="category" name="category" [(ngModel)]="country1" #category="ngModel">
-                                <option value="" disabled>Choose category</option>
-                                <option *ngFor="let country of countries" [value]="country.id">
-                                    {{ country.name }}
+                            <select id="category" name="category" formControlName="category"
+                                (change)="OnChange($event)">
+                                <option value="" disabled>Choose Category</option>
+                                <option *ngFor="let category of categories" [value]="category.id">
+                                    {{ category.name }}
                                 </option>
                             </select>
                         </div>
@@ -41,9 +43,10 @@
         <hr class="solid">
         <!--Import Expense Excel-->
         <div class="bottom-content">
-            <h2>Upload Expense Detail</h2>
-            <p>More content can go here, such as FAQs, contact information, or detailed instructions related to the
-                expense report form.</p>
+            <h1 class="Title">Today Expense Detail</h1>
+            <div class="Expense-Container">
+
+            </div>
         </div>
     </div>
 </div>

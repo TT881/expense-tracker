@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Form } from '@angular/forms';
 import { UrlSegment } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -8,6 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class APIService {
   UserapiURL: string | null = localStorage.getItem('UIAPILINK') + '/api/User';
+  ExpenseapiURL: string | null =
+    localStorage.getItem('UIAPILINK') + '/api/Expense';
   params: HttpParams | undefined;
 
   constructor(private http: HttpClient) {}
@@ -26,5 +29,13 @@ export class APIService {
       Accept: 'application/json',
     });
     return this.http.post(url, body, { headers });
+  }
+
+  SubmitExpense(ExpenseForm: FormData): Observable<any> {
+    return this.http.post(`${this.ExpenseapiURL}/AddExpense`, ExpenseForm);
+  }
+
+  GetCategory(): Observable<any> {
+    return this.http.get<any>(`${this.ExpenseapiURL}/GetExpenseCategory`);
   }
 }

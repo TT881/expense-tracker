@@ -30,7 +30,7 @@ export class AuthenticationService {
           );
         } else {
           this.tostrservice.error(
-            "Don't have this user in the DB!",
+            "Don't have this user in the DB!\n Please sign up first.",
             TostrInterface.middle
           );
         }

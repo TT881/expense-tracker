@@ -7,11 +7,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
+import { SpreadSheetComponent } from './Components/SpreadSheet/SpreadSheet.component';
 
 @NgModule({
   declarations: [SideNavComponent],
-  exports: [SideNavComponent],
+  exports: [SideNavComponent, SpreadSheetComponent],
   imports: [
+    SpreadSheetComponent,
     CommonModule,
     MatSidenavModule,
     MatListModule,

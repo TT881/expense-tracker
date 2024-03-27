@@ -5,6 +5,8 @@
 .sideContext {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  overflow: auto;
 }
 .content-area {
   padding: 5px;

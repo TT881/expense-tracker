@@ -1,0 +1,130 @@
+<div flexLayout="row" *ngSwitchCase="'Default'">
+  <mat-table #table class="SpreadsheetTable" [dataSource]="datasource" matSort [style.height.px]="Tableheight"
+    (matSortChange)="sortData($event)">
+    <div *ngFor="let column of dc; let i = index">
+
+      <ng-container [matColumnDef]="column">
+        <mat-header-cell mat-sort-header mwlResizable [enableGhostResize]="true"
+          (resizeEnd)="onResizeEnd($event, displayedColumnsField[i].ColumnName, i)"
+          [style.width.px]="displayedColumnsField[i].Width" [ngClass]="{ 'make-header-select': Inputfocused == column }"
+          *matHeaderCellDef>
+          {{ displayedColumnsField[i].DisplayName | uppercase }}
+        </mat-header-cell>
+
+        <mat-cell #cell [style.width.px]="displayedColumnsField[i].Width" *matCellDef="let row; let j = index"
+          [ngClass]="
+          {
+            'mat-cell-text': displayedColumnsField[i].Align == 'left',
+            'make-cell-edit': Inputfocused == column && j == SelectedRowIndex
+          }" (contextmenu)="openFilterTemplate($event, cell, row, row[column], column)">
+
+          <div *ngIf="displayedColumnsField[i].Uielement=='input'">
+            <!-- <app-InputField [columnWidth]=" column.Width" [row]="row" [column]="column" [index]="j"
+                [customValidationFn]="getValidationFunction()" (OnchangedInputfields)="GetAllchangedInputfields($event)"
+                (dataChange)="onDataChange($event)">
+              </app-InputField> -->
+          </div>
+
+          <div
+            *ngIf="displayedColumnsField[i].Uielement == 'date' || displayedColumnsField[i].Uielement == 'datepicker'">
+            {{ row[column] | date: displayedColumnsField[i].Format }}
+          </div>
+
+          <div *ngIf=" displayedColumnsField[i].Uielement=='icon'">
+            <!-- <app-Icon [row]=" row" [column]="column" [Iconsrc]="this.IconSrc(row,column)"
+                [IconTooltip]="this.IconTooltip(row)">
+              </app-Icon> -->
+          </div>
+
+
+          <div *ngIf="displayedColumnsField[i].Uielement == 'checkbox'">
+            <!-- <app-Checkbox [checked]="getCheckboxValue(row, column)" [row]="row" [column]="column"
+                [disabledChecked]="disableCheckboxValue(row, column) " (checkboxChanged)="onCheckboxChanged($event)">
+              </app-Checkbox> -->
+          </div>
+
+
+          <div *ngIf="displayedColumnsField[i].Uielement == 'button'">
+            <!-- <app-Button (click)="OnClickBtn(row,column)"
+                [disabled]="this.disabledBtnValue(row,column)">{{this.buttonDisplayName(row,
+                column)}}</app-Button> -->
+          </div>
+
+
+          <div *ngIf="displayedColumnsField[i].Uielement == 'dropdown'">
+            <!-- <app-Dropdown [dropdowntype]="this.dropdownType" [dropdowndata]=" this.Dropdowndata" [disabled]="false"
+                (dataChange)="onDataChange($event);" [required]="true" [rowIndex]="j" [column]="column" [row]="row">
+              </app-Dropdown> -->
+          </div>
+
+
+          <div *ngIf=" displayedColumnsField[i].Uielement==null && displayedColumnsField[i].Format==null ">
+            {{ row[column] }}
+          </div>
+        </mat-cell>
+      </ng-container>
+    </div>
+    <mat-header-row [style.min-width.px]=" 1660" *matHeaderRowDef="dc"></mat-header-row>
+    <mat-row [style.min-width.px]=" 1660" *matRowDef="let index = index; let row; columns: dc"
+      (click)="highlight(row, index); Setselectedrowinfo(row)" [ngClass]=" { 'make-select' : index==SelectedRowIndex }">
+    </mat-row>
+  </mat-table>
+
+  <table *ngIf="Enablefooter" mat-table>
+    <div *ngFor="let column of dc; let i = index" [matColumnDef]="column">
+      <td mat-footer-cell *matFooterCellDef></td>
+    </div>
+    <ng-container matColumnDef="disclaimer">
+      <td mat-footer-cell *matFooterCellDef colspan="10">
+        <div fxlayout="row" fxlayout.lt-md="row" fxLayoutGap="0px">
+          <mat-label>Record:</mat-label>
+          <app-ToolTip text="Previous Record" tooltipClass="tooltipClass"> <button
+              [disabled]="this.SelectedRowIndex == 0" mat-button (click)="PreviousRecord()">
+              <mat-icon>keyboard_arrow_left </mat-icon>
+            </button></app-ToolTip>
+
+          <input
+            style="width: 12%; height:25px; -webkit-user-modify: read-only; align-items: center; text-align: center;margin-right: 0px;"
+            [(ngModel)]="Records" (keydown.enter)="UpdateSelectedRecord()" readonly="readonly" />
+
+          <app-ToolTip text="Next Record" tooltipClass="tooltipClass"> <button
+              [disabled]="this.SelectedRowIndex == this.FilteredDataLength - 1" mat-button (click)="NextRecord()">
+              <mat-icon>keyboard_arrow_right </mat-icon>
+            </button></app-ToolTip>
+
+          <app-ToolTip text="Click to filter the records by using the last saved filter" tooltipClass="tooltipClass">
+            <button class="footer-toggle" style="text-align: left; width: 100px"
+              *ngIf="ShowUnFilter === false; else other_content" mat-button>
+              <img [src]="this.Clearfilter" style="height: 20px" /> UnFiltered
+            </button></app-ToolTip>
+
+          <ng-template #other_content>
+            <app-ToolTip text="Click to remove filter from the records" tooltipClass="tooltipClass">
+              <button class="footer-toggle" style="text-align: left; width: 100px" mat-button (click)="Showall()">
+                <img [src]="this.filterImg" style="height: 20px" /> Filtered
+              </button></app-ToolTip>
+          </ng-template>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-footer-row *matFooterRowDef="['disclaimer']; sticky: false" class="footer-card "></tr>
+  </table>
+
+  <div style="visibility: hidden; position: fixed" [style.left]="this.contextMenuPosition.x"
+    [style.top]="this.contextMenuPosition.y" [matMenuTriggerFor]="filterMenu">
+  </div>
+
+  <mat-menu #filterMenu="matMenu">
+    <ng-template matMenuContent let-item="item">
+      <button mat-menu-item (click)="filterImg(item,'Equals')">
+        Equals to : {{ this.SelectedColumnValue }}
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="Filtering(item,'NotEquals')">
+        Not Equals to : {{ this.SelectedColumnValue }}
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="Showall()">Show all</button>
+    </ng-template>
+  </mat-menu>
+</div>

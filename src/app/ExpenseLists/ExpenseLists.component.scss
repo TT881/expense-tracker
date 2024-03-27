@@ -7,8 +7,7 @@
   margin: auto;
   max-width: 700px;
   overflow: auto;
-  padding: 20px;
-  // border: 1px solid gray;
+  padding: 10px;
   border-radius: 3px;
 }
 
@@ -85,4 +84,13 @@ hr.solid {
 
 h2 {
   text-align: center;
+}
+
+.DailyExpense-Container {
+  box-sizing: border-box;
+  height: 400px;
+  border: 1px solid black;
+  display: flex;
+  margin: 2px;
+  padding: 10px;
 }

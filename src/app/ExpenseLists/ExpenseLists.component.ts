@@ -17,6 +17,7 @@ import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from '../shared/services/toastr.service';
 import { TostrInterface } from '../shared/Models/TostrInterface';
 import { error } from 'console';
+import { SpreadSheetComponent } from '../shared/Components/SpreadSheet/SpreadSheet.component';
 
 @Component({
   standalone: true,
@@ -31,6 +32,7 @@ import { error } from 'console';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SpreadSheetComponent,
   ],
 })
 export class ExpenseListsComponent implements OnInit {

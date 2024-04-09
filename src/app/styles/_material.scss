@@ -1,0 +1,323 @@
+@import "./global";
+
+.mat-toolbar {
+  height: 64px;
+  background-color: #5078d2;
+}
+
+.nav-brand {
+  flex: 1 1 auto;
+  width: 215px;
+  text-align: center;
+}
+
+.visible-sm {
+  display: none !important;
+}
+
+.userprofile {
+  color: #fff;
+
+  .material-icons {
+    font-size: 32px;
+  }
+}
+legend {
+  text-transform: uppercase;
+  padding-inline-start: 15px;
+  font-size: inherit;
+  line-height: 30px;
+  font-weight: 600;
+}
+fieldset {
+  display: block;
+  margin-inline-start: 2px;
+  margin-inline-end: 2px;
+  padding-block-start: 0.35em;
+  padding-inline-start: 0.75em;
+  padding-inline-end: 0.75em;
+  padding-block-end: 0.625em;
+  min-inline-size: min-content;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(192, 192, 192);
+  border-image: initial;
+  border-radius: 2px;
+}
+
+.mat-label-style {
+  width: 200px;
+  padding-left: 3px;
+  display: flex;
+  height: 35px !important;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  //color: black;
+  background-color: #f2f2f2 !important;
+  // border: 1px solid $base-dark-grey !important;
+  font-family: "Roboto", sans-serif;
+}
+
+.mat-mdc-tab.mdc-tab {
+  flex-grow: 0;
+  height: 32px;
+}
+/*MAT TABLE*/
+table {
+  td.mat-footer-cell {
+    border-bottom-width: 0px !important;
+  }
+  tr.mat-footer-row {
+    color: #000000;
+    height: 31px;
+    background-color: #d9d9d9;
+    justify-content: center !important;
+    position: absolute;
+    width: 100%;
+  }
+}
+.mat-mdc-table {
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 0px;
+  .mat-form-field {
+    &.mat-form-field-appearance-outline .mat-form-field-outline {
+      display: none;
+    }
+  }
+}
+
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  flex: none;
+  justify-content: center;
+  padding-left: 3px !important;
+  align-self: stretch;
+
+  // /*added for resize column*/
+  position: relative;
+  &:not(:last-child) {
+    .resize-holder {
+      cursor: col-resize;
+      width: 20px;
+      height: 100%;
+      position: absolute;
+      right: -10px;
+      top: 0;
+      z-index: 1;
+    }
+  }
+}
+.mat-mdc-table mat-header-cell {
+  padding: 0;
+  color: $base-fixedtext1;
+  justify-content: center !important;
+  border-right: 1px solid $base-table-cell-border;
+  text-align: center;
+}
+
+:host ::ng-deep .mat-paginator {
+  background-color: #d9d9d9 !important;
+}
+:host ::ng-deep .mat-icon-button {
+  color: darkslategray !important;
+}
+:host ::ng-deep .mat-icon-button[disabled] {
+  color: gray !important;
+}
+
+.mat-mdc-table mat-cell {
+  padding: 0;
+  justify-content: center;
+  border-right: 1px solid $base-table-cell-border;
+  text-align: center;
+  color: $base-gray5;
+}
+.mat-mdc-header-row {
+  min-height: 30px;
+  cursor: pointer;
+  background-color: $base-gray3;
+  padding: 0px;
+  z-index: 1;
+  position: sticky;
+  top: 0;
+}
+.mat-mdc-footer-row {
+  height: 30px;
+  background-color: #d9d9d9;
+}
+
+.mat-mdc-footer-row:hover {
+  background-color: #d9d9d9 !important;
+}
+
+.mat-mdc-header-cell .mat-sort-header-container {
+  justify-content: center;
+}
+.mat-mdc-header-cell {
+  font-weight: bold;
+}
+.mat-mdc-row:nth-child(even) {
+  background-color: #f2f2f2;
+  min-height: 30px;
+  cursor: pointer;
+}
+
+.mat-mdc-row:nth-child(odd) {
+  background-color: #ffffff;
+  min-height: 30px;
+  cursor: pointer;
+}
+mwlResizable {
+  box-sizing: border-box;
+}
+.footer-toggle {
+  width: 100px;
+}
+
+.mat-mdc-button {
+  min-width: 40px;
+  line-height: 30px;
+  padding: 0px;
+}
+.user-menu {
+  background-color: #fafafa;
+  padding: 4pt;
+  font-size: 10pt;
+  z-index: 1000;
+  box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25);
+  border-radius: 4pt;
+  padding: 0.5em 0 0.5em 0;
+  animation: fadeIn 0.1s ease-out;
+  opacity: 1;
+  display: block;
+}
+
+.collection {
+  list-style-type: none;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.collection-item {
+  line-height: 1.5rem;
+  margin: 0;
+  list-style-type: none;
+}
+
+.user-menu hr {
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+
+.user-menu div {
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  padding: 0.5em 2em 0.5em 0.75em;
+  max-width: 18em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-menu div:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.user-menu div::before {
+  content: "";
+  float: left;
+  margin-right: 0.75em;
+  width: 0.5em;
+  height: 1em;
+  display: inline-block;
+}
+.mat-menu-item {
+  line-height: 28px;
+  height: 28px;
+  padding: 0 10px;
+}
+mat-divider.style-fix {
+  height: 100px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+button.mat-menu-item {
+  width: 100%;
+}
+.mat-menu-item {
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-align: left;
+  text-decoration: none;
+  max-width: 100%;
+  position: relative;
+}
+.make-select {
+  background-color: #bbdef9 !important;
+}
+.make-header-select {
+  background-color: #ffe86b;
+}
+.make-select {
+  background-color: #bbdef9 !important;
+}
+.make-select-border {
+  border-color: #bbdef9 !important;
+  border-style: solid;
+  border-width: 5px;
+}
+.make-select-right {
+  border-right: 1px solid $base-gray3;
+}
+.make-cell-edit {
+  background-color: #ffffff !important;
+}
+
+.mat-footer-row {
+  height: 30px;
+  background-color: $base-gray6;
+}
+.mat-menu-item {
+  line-height: 28px;
+  height: 28px;
+  padding: 0 10px;
+}
+mat-divider.style-fix {
+  height: 100px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+button.mat-menu-item {
+  width: 100%;
+}
+.mat-menu-item {
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-align: left;
+  text-decoration: none;
+  max-width: 100%;
+  position: relative;
+}

@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  EventEmitter,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   MatTable,
@@ -20,7 +27,6 @@ import { InputFieldComponent } from '../../BasicComponents/Input/InputField/Inpu
 import { DropdownComponent } from '../../BasicComponents/Dropdown/Dropdown/Dropdown.component';
 import { CheckboxComponent } from '../../BasicComponents/Checkbox/Checkbox/Checkbox.component';
 import { ButtonComponent } from '../../BasicComponents/Buttons/Button/Button.component';
-import { ToolTipComponent } from '../../BasicComponents/Tooltip/ToolTip/ToolTip.component';
 import { IconComponent } from '../../BasicComponents/Icon/Icon/Icon.component';
 import { MatMenuModule } from '@angular/material/menu';
 
@@ -49,7 +55,7 @@ import { MatMenuModule } from '@angular/material/menu';
     DropdownComponent,
     CheckboxComponent,
     ButtonComponent,
-    ToolTipComponent,
+
     IconComponent,
   ],
 })
@@ -71,6 +77,7 @@ export class SpreadSheetComponent implements OnInit {
   }
   SelectedRowIndex: any = 0;
   Inputfocused = '';
+
   @ViewChild(MatSort, { static: false }) sort: MatSort | undefined;
   @ViewChild(MatTable) table: MatTable<any> | undefined;
   @Input() dc: any[] | undefined;
@@ -99,6 +106,20 @@ export class SpreadSheetComponent implements OnInit {
   @Input() IntervalTime: number | undefined;
   @Input() TableLabelName: string | undefined;
   @Input() SavedataFlag: boolean = false;
+  @Input() getValidationFun:
+    | (() => (row: any, j: any, column: any) => (value: any) => any)
+    | undefined;
+
+  @Input() getCheckBoxValue:
+    | (() => (row: any, j: any, column: any) => boolean)
+    | undefined;
+
+  @Input() DisableCheckBoxVal:
+    | (() => (row: any, j: any, column: any) => boolean)
+    | undefined;
+
+  @Output() RowEvent = new EventEmitter<{ data: ''; actionType: '' }>();
+
   Records: any;
   FilteredDataLength: any;
   ShowUnFilter: any;
@@ -111,12 +132,8 @@ export class SpreadSheetComponent implements OnInit {
 
   ngOnInit() {}
 
-  onResizeEnd($event: ResizeEvent, arg1: any, _t12: number) {
-    throw new Error('Method not implemented.');
-  }
-  highlight(_t61: any, _t60: any) {
-    throw new Error('Method not implemented.');
-  }
+  onResizeEnd($event: ResizeEvent, arg1: any, _t12: number) {}
+  highlight(_t61: any, _t60: any) {}
   Setselectedrowinfo(_t61: any) {
     throw new Error('Method not implemented.');
   }
@@ -132,5 +149,9 @@ export class SpreadSheetComponent implements OnInit {
   }
   PreviousRecord() {
     throw new Error('Method not implemented.');
+  }
+
+  getRowData(event: any) {
+    this.RowEvent.emit(event);
   }
 }

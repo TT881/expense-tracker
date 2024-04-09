@@ -5,6 +5,7 @@ import { JsonPipe } from '@angular/common';
 import { TostrInterface } from '../Models/TostrInterface';
 import { ToastrService } from './toastr.service';
 import { filter } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +14,16 @@ export class AuthenticationService {
   constructor(
     private router: Router,
     private apiservice: APIService,
-    private tostrservice: ToastrService
+    private tostrservice: ToastrService,
+    private spinnerservice: NgxSpinnerService
   ) {}
 
   login(username: string, password: string) {
+    this.spinnerservice.show();
     this.apiservice.validateUser(username, password).subscribe({
       next: (data) => {
         if (data != null) {
+          this.spinnerservice.hide();
           localStorage.setItem('ExpenseUserName', data[0]['Name']);
           localStorage.setItem('ExpenseUserID', data[0]['UserId']);
           localStorage.setItem('isExpenseuserLoggedIn', 'true');
@@ -29,6 +33,7 @@ export class AuthenticationService {
             TostrInterface.middle
           );
         } else {
+          this.spinnerservice.hide();
           this.tostrservice.error(
             "Don't have this user in the DB!\n Please sign up first.",
             TostrInterface.middle
@@ -36,6 +41,7 @@ export class AuthenticationService {
         }
       },
       error: (error) => {
+        this.spinnerservice.hide();
         console.log('error' + JSON.stringify(error));
       },
     });

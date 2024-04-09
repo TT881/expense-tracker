@@ -26,6 +26,7 @@
     "@angular/ssr": "^17.1.2",
     "angular-resizable-element": "^7.0.2",
     "express": "^4.18.2",
+    "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

@@ -1,3 +1,6 @@
-<p>
-  Icon works!
-</p>
+<div>
+  <label *ngIf="this.IconType === 'Edit' "> <mat-icon class="Icon" [matTooltip]="this.IconTooltip"
+      (click)="ClickIcon(this.row, 'Edit')">edit</mat-icon></label>
+  <label *ngIf="this.IconType === 'Delete' "> <mat-icon class="Icon" [matTooltip]="this.IconTooltip"
+      (click)="ClickIcon(this.row, 'Delete')">delete</mat-icon></label>
+</div>

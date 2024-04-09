@@ -8,6 +8,7 @@ import { ConfigService } from './shared/services/Config.service';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './Login/Login.component';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export const configFactory = (configService: ConfigService) => {
   return () => configService.load();
@@ -21,12 +22,16 @@ export const configFactory = (configService: ConfigService) => {
     MatTabsModule,
     DashboardComponent,
     AppComponent,
+    NgxSpinnerModule,
     FormsModule,
     ToastrModule.forRoot({
       // global Toastr options
       timeOut: 3000,
       positionClass: 'custom-toast-position', //Middle
       preventDuplicates: true,
+    }),
+    NgxSpinnerModule.forRoot({
+      type: 'Ball Spin Clockwise',
     }),
   ],
   providers: [

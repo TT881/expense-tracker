@@ -45,8 +45,13 @@
         <div class="bottom-content">
             <h1 class="Title">Daily Expense Overview</h1>
             <div class="DailyExpense-Container">
-                <app-SpreadSheet></app-SpreadSheet>
+                <app-SpreadSheet [AutoRefresh]="true" [dc]="this.displayedColumns" [datasource]="this.datasource"
+                    [displayedColumnsField]="this.displayedColumnField" [tabledata]="[]" [Tableheight]=""
+                    [getValidationFun]="" [getCheckBoxValue]="" [DisableCheckBoxVal]=""
+                    (RowEvent)="GetRowInfo($event)"></app-SpreadSheet>
             </div>
         </div>
     </div>
 </div>
+
+<ngx-spinner size="medium" [type]="this.typeSelected"></ngx-spinner>

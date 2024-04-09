@@ -1,7 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Form } from '@angular/forms';
-import { UrlSegment } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,6 +9,7 @@ export class APIService {
   UserapiURL: string | null = localStorage.getItem('UIAPILINK') + '/api/User';
   ExpenseapiURL: string | null =
     localStorage.getItem('UIAPILINK') + '/api/Expense';
+  UiURL: string | null = localStorage.getItem('UIAPILINK') + '/api/UIConfig';
   params: HttpParams | undefined;
 
   constructor(private http: HttpClient) {}
@@ -37,5 +36,17 @@ export class APIService {
 
   GetCategory(): Observable<any> {
     return this.http.get<any>(`${this.ExpenseapiURL}/GetExpenseCategory`);
+  }
+
+  GetUIColumns(tableID: any): Observable<any> {
+    return this.http.get<any[]>(
+      `${this.UiURL}/GetUIColumnConfig?tableId=${tableID}`
+    );
+  }
+
+  GetExpenseListbyDate(date: any, userId: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.ExpenseapiURL}/GetExpenseListbyDate?date=${date}&userID=${userId}`
+    );
   }
 }

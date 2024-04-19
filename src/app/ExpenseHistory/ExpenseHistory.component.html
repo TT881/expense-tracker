@@ -5,5 +5,32 @@
         <div fxFlex class="content-area">
             <div class="TitleName">{{this.expensehistoryName}}</div>
         </div>
+        <div>
+            <div class="DateContainer">
+                <form [formGroup]="dateRangeForm" (ngSubmit)="onDateSubmit()">
+                    <div class="DatePickerContainer">
+                        <label style="font-weight: bold; color: #3a2020;margin-right:5px;">Select Date:</label>
+                        <label style="margin-right:5px">From</label>
+                        <input style="margin-right:20px;" type="date" formControlName="startdate" />
+                        <label style="margin-right:5px">To</label>
+                        <input type="date" formControlName="enddate" />
+                        <button type="submit" id="FilterBtn"
+                            [disabled]="dateRangeForm.errors?.['dateRangeInvalid'] === true">Apply</button>
+                    </div>
+                    <div *ngIf="dateRangeForm.errors?.['dateRangeInvalid'] == true" class="errorMessage">
+                        <mat-icon>announcement</mat-icon>Please ensure that end date must be greater than or equal to
+                        start date.
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="History-Container">
+                <app-SpreadSheet #SpreadSS [AutoRefresh]="true" [dc]="this.displayedColumns" [Tableheight]="800"
+                    [datasource]="this.datasource" [displayedColumnsField]="this.displayedColumnField" [tabledata]="[]"
+                    [getCheckBoxValue]="" [DisableCheckBoxVal]="" (RowEvent)="GetRowInfo($event)"
+                    [UniqueID]="'ExpenseID'"></app-SpreadSheet>
+            </div>
+        </div>
     </div>
 </div>

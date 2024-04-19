@@ -60,6 +60,10 @@ import { MatMenuModule } from '@angular/material/menu';
   ],
 })
 export class SpreadSheetComponent implements OnInit {
+  IsEditable: boolean = false;
+  tableDC: any;
+  originalData: any;
+  currentEditRow: any;
   NextRecord() {
     throw new Error('Method not implemented.');
   }
@@ -78,6 +82,7 @@ export class SpreadSheetComponent implements OnInit {
   SelectedRowIndex: any = 0;
   Inputfocused = '';
 
+  @Input() UniqueID: any;
   @ViewChild(MatSort, { static: false }) sort: MatSort | undefined;
   @ViewChild(MatTable) table: MatTable<any> | undefined;
   @Input() dc: any[] | undefined;
@@ -132,11 +137,20 @@ export class SpreadSheetComponent implements OnInit {
 
   ngOnInit() {}
 
-  onResizeEnd($event: ResizeEvent, arg1: any, _t12: number) {}
-  highlight(_t61: any, _t60: any) {}
-  Setselectedrowinfo(_t61: any) {
-    throw new Error('Method not implemented.');
+  ngOnChanges(): void {
+    this.tableDC = this.datasource;
   }
+
+  onResizeEnd($event: ResizeEvent, arg1: any, _t12: number) {}
+
+  highlight(row: any, index: any) {
+    const previousIndex = this.SelectedRowIndex;
+    this.SelectedRowIndex = index;
+    // if (this.SelectedRowIndex != previousIndex) {
+    // }
+  }
+
+  Setselectedrowinfo(_t61: any) {}
   Filtering(_t134: any, arg1: string) {
     throw new Error('Method not implemented.');
   }
@@ -151,7 +165,50 @@ export class SpreadSheetComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  getRowData(event: any) {
-    this.RowEvent.emit(event);
+  getRowData(event: any, row: any, j: any) {
+    if (event.actionType == 'Edit') {
+      this.currentEditRow = row;
+      this.IsEditable = !this.IsEditable;
+      this.tableDC.forEach((row: any) => {
+        if (row[this.UniqueID] == event.data[this.UniqueID]) {
+          if (!row.isEditable) {
+            //store original data
+            row._originalData = JSON.parse(JSON.stringify(row)); //the row that Edit one save to OriginalData
+          }
+          row.isEditable = !event.data.isEditable;
+        } else {
+          row.isEditable = false;
+        }
+      });
+      this.RowEvent.emit(event);
+    } else if (event.actionType === 'Cancel') {
+      this.IsEditable = !this.IsEditable;
+      this.tableDC.forEach((row: any) => {
+        if (
+          row[this.UniqueID] === event.data[this.UniqueID] &&
+          row._originalData
+        ) {
+          {
+            Object.assign(row, row._originalData);
+          }
+          row.isEditable = false;
+          //Clean up originalData
+          delete row._originalData;
+        }
+      });
+      this.RowEvent.emit(event);
+      this.currentEditRow = null;
+    } else if (event.actionType === 'Save') {
+      this.currentEditRow = null;
+      this.RowEvent.emit(event);
+    } else if (event.actionType === 'Delete') {
+      this.currentEditRow = null;
+      this.RowEvent.emit(event);
+    }
+  }
+
+  ResetCrudAction() {
+    this.currentEditRow = null;
+    this.IsEditable = !this.IsEditable;
   }
 }

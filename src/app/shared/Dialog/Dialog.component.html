@@ -1,8 +1,15 @@
 <div class="DialogContainer">
-  <span [ngSwitch]="">
-    <p *ngSwitchCase="">
-
+  <span [ngSwitch]="data.dialogType">
+    <p *ngSwitchCase="'ConfirmDialog'">
+      <label class="ConfirmTitle ">Confirmation</label>
     </p>
+    <p>
+      <label class="ConfirmPara ">{{data.title}}</label>
+    </p>
+    <div class="btn-Container">
+      <button class="leftBtn" (click)="Close()">Cancel</button>
+      <button class="rightBtn" [mat-dialog-close]="true">Submit</button>
+    </div>
     <p *ngSwitchCase="">
 
     </p>

@@ -1,0 +1,43 @@
+.ConfirmTitle{
+    border: none; 
+    height: 30px;
+    display: flex;
+    padding: 5px;
+    background-color: lightgray;
+    font-size: 18px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.ConfirmPara{
+    display: flex;
+    font-size: 25px;
+    padding: 10px;
+    color: darkslategray;
+    line-height: normal;
+}
+
+.btn-Container{
+    display: flex;
+    justify-content: space-between;
+    margin:5px;
+}
+
+.leftBtn{
+    justify-content: left;
+    height:35px;
+    width:100px;
+    border: none;
+    background-color: #f78f8f;
+    cursor:pointer;
+}
+.rightBtn{
+    justify-content: right;
+    height:35px;
+    width:100px;
+    border: none;
+    background-color: #35d47f;
+    cursor:pointer;
+}
+

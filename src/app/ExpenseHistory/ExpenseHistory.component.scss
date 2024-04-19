@@ -1,1 +1,53 @@
 @import "../styles/globalstyle.scss";
+
+.History-Container {
+  box-sizing: border-box;
+  height: 100vh;
+  border: 1px solid gray;
+  margin: 2px;
+  padding: 10px;
+}
+
+.DateContainer {
+  justify-content: flex-start;
+  border: 1px solid gray;
+  display: flex;
+  margin: 3px;
+  font-size: 15px;
+  padding: 5px;
+  background-color: lightgray;
+}
+
+.DatePickerContainer {
+  display: flex;
+  margin-left: 10px;
+}
+
+#FilterBtn {
+  margin-left: 30px;
+  height: 22px;
+  background: #a8f2ff;
+  border: 1px solid gray;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#FilterBtn:hover {
+  background: #6dd5ed;
+}
+
+#FilterBtn:disabled {
+  background: gray;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  #FilterBtn {
+    margin-left: 20px;
+    flex-direction: row;
+  }
+}
+.errorMessage {
+  color: red;
+  margin-right: 5px;
+}

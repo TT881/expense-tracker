@@ -3,4 +3,8 @@
       (click)="ClickIcon(this.row, 'Edit')">edit</mat-icon></label>
   <label *ngIf="this.IconType === 'Delete' "> <mat-icon class="Icon" [matTooltip]="this.IconTooltip"
       (click)="ClickIcon(this.row, 'Delete')">delete</mat-icon></label>
+  <label *ngIf="this.IconType === 'Cancel' "> <mat-icon class="Icon" [matTooltip]="this.IconTooltip"
+      (click)="ClickIcon(this.row, 'Cancel')">cancel</mat-icon></label>
+  <label *ngIf="this.IconType === 'Save' "> <mat-icon class="Icon" [matTooltip]="this.IconTooltip"
+      (click)="ClickIcon(this.row, 'Save')">save</mat-icon></label>
 </div>

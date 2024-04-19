@@ -8,17 +8,27 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 export class DialogService {
   constructor(private dialog: MatDialog) {}
 
-  // openDialog(data: any, dialogType?: any, width?: any, height?: any): any {
-  //   let component: any;
-  //   component = DialogComponent;
-  //   return this.dialog.open(component, {
-  //     width: width + 'px',
-  //     height: height + '%',
-  //     panelClass: 'custom-overlay-pane-class',
-  //     data: data,
-  //     dialogType: dialogType,
-  //   });
-  // }
+  openDialog(
+    data: any,
+    dialogType?: any,
+    width?: any,
+    height?: any,
+    title?: string
+  ): any {
+    let component: any;
+    component = DialogComponent;
+    return this.dialog.open(component, {
+      disableClose: true,
+      width: width + 'px',
+      height: height + 'px',
+      panelClass: 'custom-overlay-pane-class',
+      data: {
+        data: data,
+        dialogType: dialogType,
+        title: title,
+      },
+    });
+  }
 
   openDynamicDialog() {}
 }

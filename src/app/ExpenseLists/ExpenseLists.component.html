@@ -11,7 +11,7 @@
                 <h1 class="Title">Expense Report Form</h1>
                 <div class="ExpenseList-Content">
                     <form class="expenseForm" [formGroup]="this.ExpenseListForm"
-                        (submit)="onSubmit(this.ExpenseListForm.value)">
+                        (submit)="onSubmit(this.ExpenseListForm)">
                         <div class="form-group">
                             <label for="category">Expense Category:</label>
                             <select id="category" name="category" formControlName="category"
@@ -45,10 +45,10 @@
         <div class="bottom-content">
             <h1 class="Title">Daily Expense Overview</h1>
             <div class="DailyExpense-Container">
-                <app-SpreadSheet [AutoRefresh]="true" [dc]="this.displayedColumns" [datasource]="this.datasource"
-                    [displayedColumnsField]="this.displayedColumnField" [tabledata]="[]" [Tableheight]=""
-                    [getValidationFun]="" [getCheckBoxValue]="" [DisableCheckBoxVal]=""
-                    (RowEvent)="GetRowInfo($event)"></app-SpreadSheet>
+                <app-SpreadSheet #SpreadSS [AutoRefresh]="true" [dc]="this.displayedColumns"
+                    [datasource]="this.datasource" [displayedColumnsField]="this.displayedColumnField" [tabledata]="[]"
+                    [Tableheight]="" [getValidationFun]="this.ValidateInput.bind(this)" [getCheckBoxValue]=""
+                    [DisableCheckBoxVal]="" (RowEvent)="GetRowInfo($event)" [UniqueID]="'ExpenseID'"></app-SpreadSheet>
             </div>
         </div>
     </div>

@@ -49,4 +49,43 @@ export class APIService {
       `${this.ExpenseapiURL}/GetExpenseListbyDate?date=${date}&userID=${userId}`
     );
   }
+
+  UpdateExpense(expenseID: number, cost: number): Observable<any> {
+    const url = `${this.ExpenseapiURL}/UpdateExpenseList`;
+    const body = JSON.stringify({ expenseID, cost });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+    return this.http.patch(url, body, { headers });
+  }
+
+  DeleteExpense(expenseID: number, cost: number): Observable<any> {
+    const url = `${this.ExpenseapiURL}/DeleteExpenseList`;
+    const body = JSON.stringify({ expenseID, cost });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const options = {
+      headers: headers,
+      body: body, //Including the body in the options for the delete request
+    };
+    return this.http.delete(url, options);
+  }
+
+  GetExpenseHistory(userID: number): Observable<any> {
+    return this.http.get<any[]>(
+      `${this.ExpenseapiURL}/GetExpenseHistory?userID=${userID}`
+    );
+  }
+
+  FilterExpenseHistory(
+    userID: number,
+    startdate: any,
+    enddate: any
+  ): Observable<any> {
+    return this.http.get<any[]>(
+      `${this.ExpenseapiURL}/FilterExpenseHistory?userID=${userID}&startdate=${startdate}&enddate=${enddate}`
+    );
+  }
 }

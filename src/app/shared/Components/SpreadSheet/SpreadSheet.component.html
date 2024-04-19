@@ -1,8 +1,7 @@
 <div flexLayout="row">
-  <mat-table #table class="SpreadSheetContainer" [dataSource]="datasource" matSort [style.height.px]="Tableheight"
+  <mat-table #table class="SpreadSheetContainer" [dataSource]="tableDC" matSort [style.height.px]="Tableheight"
     (matSortChange)="sortData($event)">
     <div *ngFor="let column of dc; let i = index">
-
       <ng-container [matColumnDef]="column">
         <mat-header-cell mat-sort-header mwlResizable [enableGhostResize]="true"
           (resizeEnd)="onResizeEnd($event, displayedColumnsField[i].ColumnName, i)"
@@ -26,18 +25,26 @@
           </div>
 
           <div *ngIf="displayedColumnsField[i].UIelement == 'date' || displayedColumnsField[i].UIelement == 'datetime'">
-            {{ row[column] | date }}
+            {{ row[column] | date :'dd/MM/yyyy' }}
           </div>
 
           <div *ngIf=" displayedColumnsField[i].UIelement =='icon'">
             <ng-container *ngIf="displayedColumnsField[i].ColumnName == 'Edit'">
-              <app-Icon [row]=" row" [column]="column" [IconType]="'Edit'" [IconTooltip]="'Edit'"
-                (clickIconEvent)="getRowData($event)">
+              <app-Icon *ngIf="!this.IsEditable || this.currentEditRow !== row" [row]="row" [column]="column"
+                [IconType]="'Edit'" [IconTooltip]="'Edit'" (clickIconEvent)="getRowData($event, row, j)">
               </app-Icon>
+              <ng-container *ngIf="this.IsEditable && this.currentEditRow === row">
+                <app-Icon [row]="row" [column]="column" [IconType]="'Cancel'" [IconTooltip]="'Cancel'"
+                  (clickIconEvent)="getRowData($event, row, j)">
+                </app-Icon>
+                <app-Icon [row]="row" [column]="column" [IconType]="'Save'" [IconTooltip]="'Save'"
+                  (clickIconEvent)="getRowData($event, row, j)">
+                </app-Icon>
+              </ng-container>
             </ng-container>
             <ng-container *ngIf="displayedColumnsField[i].ColumnName == 'Delete'">
-              <app-Icon [row]=" row" [column]="column" [IconType]="'Delete'" [IconTooltip]="'Delete'"
-                (clickIconEvent)="getRowData($event)">
+              <app-Icon [row]="row" [column]="column" [IconType]="'Delete'" [IconTooltip]="'Delete'"
+                (clickIconEvent)="getRowData($event, row,j)">
               </app-Icon>
             </ng-container>
           </div>
@@ -49,8 +56,13 @@
               </app-Checkbox> -->
           </div>
 
-          <div *ngIf="displayedColumnsField[i].UIelement == 'decimal'">
-            {{row[column] | currency }}
+          <div *ngIf="displayedColumnsField[i].UIelement == 'decimal' ">
+            <ng-container *ngIf="row.isEditable == true && this.IsEditable == true; else displayOnly">
+              <input class="EditInput" [(ngModel)]="row[column]" type="number">
+            </ng-container>
+            <ng-template #displayOnly>
+              {{row[column] | currency }}
+            </ng-template>
           </div>
 
 

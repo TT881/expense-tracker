@@ -1,6 +1,8 @@
+import { ValidationService } from './../shared/services/Validation.service';
+import { DialogService } from './../shared/services/dialog.service';
 import { AuthenticationService } from './../shared/services/Authentication.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardComponent } from '../Dashboard/Dashboard.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
@@ -21,6 +23,7 @@ import { SpreadSheetComponent } from '../shared/Components/SpreadSheet/SpreadShe
 import { filter, tap } from 'rxjs';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { MatTableDataSource } from '@angular/material/table';
+import exp from 'constants';
 
 @Component({
   standalone: true,
@@ -52,13 +55,28 @@ export class ExpenseListsComponent implements OnInit {
     private apiservice: APIService,
     private authservice: AuthenticationService,
     private tostrService: ToastrService,
-    private spinnerService: NgxSpinnerService
-  ) {}
+    private spinnerService: NgxSpinnerService,
+    private dialogService: DialogService,
+    private validationService: ValidationService
+  ) {
+    this.initializeForm();
+  }
   titleName: string | undefined = 'Expense Management';
 
   ExpenseListForm!: FormGroup;
   userId!: number;
   typeSelected: string = 'Ball Spin Clockwise';
+  @ViewChild('SpreadSS') SpreasSSComp: SpreadSheetComponent | undefined;
+
+  initializeForm(): void {
+    this.ExpenseListForm = this.fg.group({
+      category: ['', Validators.required],
+      date: ['', Validators.required],
+      remark: [''],
+      cost: ['', Validators.required],
+      userID: [localStorage.getItem('ExpenseUserID') || ''],
+    });
+  }
 
   ngOnInit() {
     this.GetCategory();
@@ -78,7 +96,11 @@ export class ExpenseListsComponent implements OnInit {
 
   onSubmit(value: any) {
     this.spinnerService.show();
-    if (value) {
+    if (value.valid) {
+      const newUserID = localStorage.getItem('ExpenseUserID');
+      this.ExpenseListForm.patchValue({
+        UserID: newUserID,
+      });
       this.apiservice.SubmitExpense(this.ExpenseListForm.value).subscribe({
         next: (data) => {
           if (data) {
@@ -89,6 +111,7 @@ export class ExpenseListsComponent implements OnInit {
             this.spinnerService.hide();
           }
           this.ExpenseListForm.reset();
+          this.GetDailyExpenseTableData();
         },
         error: (error) => {
           this.spinnerService.hide();
@@ -111,7 +134,10 @@ export class ExpenseListsComponent implements OnInit {
       });
     } else {
       this.spinnerService.hide();
-      console.log('No data from Expense Form.');
+      this.tostrService.error(
+        'Please fill up all the required fields!',
+        TostrInterface.middle
+      );
     }
   }
 
@@ -134,7 +160,6 @@ export class ExpenseListsComponent implements OnInit {
       });
       this.displayedColumns = columnHeaders;
       this.displayedColumnField = data;
-      console.log(this.displayedColumnField);
     });
   }
 
@@ -144,6 +169,8 @@ export class ExpenseListsComponent implements OnInit {
       .GetExpenseListbyDate(todayDate, this.userId)
       .subscribe((data) => {
         if (data != null) {
+          this.datasource = data;
+        } else {
           this.datasource = data;
         }
       });
@@ -158,10 +185,70 @@ export class ExpenseListsComponent implements OnInit {
   }
 
   GetRowInfo(data: any) {
-    if (data.actionType == 'Edit') {
-      //open dialogLog
+    const expenseID = Number(data['data']['ExpenseID']);
+    const cost = Number(data['data']['Cost']);
+    console.log(expenseID + ',' + cost);
+    if (data.actionType == 'Save') {
+      this.dialogService
+        .openDialog(
+          data,
+          'ConfirmDialog',
+          '400',
+          '200',
+          'Do you confirm to save the changes?'
+        )
+        .afterClosed()
+        .subscribe((res: any) => {
+          if (res) {
+            this.apiservice
+              .UpdateExpense(expenseID, cost)
+              .subscribe((res: any) => {
+                if (res['message'] != null) {
+                  this.tostrService.success(
+                    res['message'],
+                    TostrInterface.middle
+                  );
+                  this.SpreasSSComp?.ResetCrudAction();
+                  this.GetDailyExpenseTableData();
+                }
+              });
+          } else {
+            return;
+          }
+        });
     } else if (data.actionType == 'Delete') {
-      //open dialogLog
+      this.dialogService
+        .openDialog(
+          data,
+          'ConfirmDialog',
+          '400',
+          '200',
+          'Do you confirm to delete this item?'
+        )
+        .afterClosed()
+        .subscribe((res: any) => {
+          if (res) {
+            this.apiservice
+              .DeleteExpense(expenseID, cost)
+              .subscribe((res: any) => {
+                if (res['message'] != null) {
+                  this.tostrService.success(
+                    res['message'],
+                    TostrInterface.middle
+                  );
+                  this.SpreasSSComp?.ResetCrudAction();
+                  this.GetDailyExpenseTableData();
+                }
+              });
+          } else {
+            return;
+          }
+        });
     }
+  }
+
+  ValidateInput() {
+    return (row: any, j: any, column: any) => (value: any) =>
+      this.validationService.checkSpreadsheetInput(value, row, j, column);
   }
 }
